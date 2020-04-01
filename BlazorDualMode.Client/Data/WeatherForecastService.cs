@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using BlazorDualMode.Shared;
 using Microsoft.AspNetCore.Components;
@@ -20,7 +21,7 @@ namespace BlazorDualMode.Client.Data
 
         public async Task<IEnumerable<WeatherForecast>> GetForecastAsync()
         {
-            return await _httpClient.GetJsonAsync<WeatherForecast[]>("api/WeatherForecasts");
+            return await _httpClient.GetFromJsonAsync<WeatherForecast[]>("api/WeatherForecasts");
         }
     }
 }

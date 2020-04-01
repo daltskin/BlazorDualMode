@@ -37,7 +37,8 @@ namespace BlazorDualMode.Server
             app.UseHttpsRedirection();
 
             app.UseResponseCompression();
-            app.UseClientSideBlazorFiles<Client.Startup>();
+            //app.UseClientSideBlazorFiles<Client.App>();
+            app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
             app.UseRouting();

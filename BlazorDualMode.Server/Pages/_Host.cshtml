@@ -27,11 +27,11 @@
 <body>
         @if (Env.IsDevelopment())
         {
-            <app>@(await Html.RenderComponentAsync<App>())</app>
+            <app>@(await Html.RenderComponentAsync<App>(renderMode: RenderMode.Static))</app>
         }
         else
         {
-            <app>@(await Html.RenderStaticComponentAsync<App>())</app>
+            <app>@(await Html.RenderComponentAsync<App>(renderMode: RenderMode.Server))</app>
         }
 
     <script src="_framework/blazor.@(Env.IsDevelopment() ? "server" : "webassembly").js"></script>

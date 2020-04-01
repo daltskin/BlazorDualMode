@@ -1,16 +1,22 @@
-﻿using Microsoft.AspNetCore.Blazor.Hosting;
+﻿using BlazorDualMode.Client.Data;
+using BlazorDualMode.Shared;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace BlazorDualMode.Client
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-        }
+            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            builder.RootComponents.Add<App>("app");
 
-        public static IWebAssemblyHostBuilder CreateHostBuilder(string[] args) =>
-            BlazorWebAssemblyHost.CreateDefaultBuilder()
-                .UseBlazorStartup<Startup>();
+            builder.Services.AddBaseAddressHttpClient();
+            builder.Services.AddSingleton<IWeatherForecastService, WeatherForecastService>();
+
+            await builder.Build().RunAsync();
+        }
     }
 }
